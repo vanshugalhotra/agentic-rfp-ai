@@ -1,0 +1,40 @@
+SKU,Product_Name,Category,Cable_Type,Armored,Num_Cores_Num_Pairs,Conductor_Material,Conductor_Size,Conductor_Standard,Insulation_Material,Insulation_Thickness_mm,Sheath_Material,Sheath_Thickness_mm,Armoring_Type,Shielding_Type,Voltage_Rating_V,Conductor_Resistance_Ω_km,Insulation_Resistance_MΩ_km,Test_Voltage_V,Tensile_Strength_N_mm2,Elongation_Percent,Standards,Length_m
+CTL-25-ARM-PB,25 Core Armoured Control Cable,Control Cable,Multi-core Armoured,Y,25 Cores,Copper ATC,48/0.2 mm,IS 8130,HDPE,1,HR PVC,2.5,GI Flat Strip,Al-Mylar Tape + Drain Wire,1100,13.4,10000,2000,18,300,IS 8130/BS 6234,1000
+CTL-25-ARM-DL,25 Core Armoured Control Cable,Control Cable,Multi-core Armoured,Y,25 Cores,Copper ATC,48/0.2 mm,IS 8130,HDPE,0.9,HR PVC,2.3,GI Flat Strip,Al-Mylar Tape,1100,13.8,9500,1800,17,280,IS 8130,1000
+CTL-25-ARM-CM,25 Core Control Cable,Control Cable,Multi-core Armoured,Y,25 Cores,Copper,48/0.2 mm,IS 8130,Polyethylene,1.1,HR PVC,2.4,GI Wire,Al-Foil,1000,14.2,8000,1500,16,250,IS 1554,1000
+CTL-20-ARM-PB,20 Core Armoured Control Cable,Control Cable,Multi-core Armoured,Y,20 Cores,Copper ATC,36/0.2 mm,IS 8130,HDPE,1,HR PVC,2,GI Flat Strip,Al-Mylar Tape,1100,15,10000,2000,18,300,IS 8130,1000
+CTL-25-UNARM-PB,25 Core Unarmoured Control Cable,Control Cable,Multi-core Unarmoured,N,25 Cores,Copper ATC,48/0.2 mm,IS 8130,HDPE,1,HR PVC,1.8,None,Al-Mylar Tape,1100,13.4,10000,2000,18,300,IS 8130,1000
+COM-12PA-ARM-PB,12 Pair Armoured Copper Cable,Communication Cable,Multi-pair Armoured,Y,12 Pairs,Copper ATC,7/0.27 mm,IEC 60228,MDPE,0.4,FR PVC,2,GI Flat Strip,Al-Foil + Drain Wire,700,110,5000,700,12.5,300,IEC 60228/IS 5831,1000
+COM-12PA-ARM-DL,12 Pair Armoured Telephone Cable,Communication Cable,Multi-pair Armoured,Y,12 Pairs,Copper,7/0.27 mm,IEC 60228,MDPE,0.35,FR PVC,1.8,GI Wire,Al-Foil,700,115,4500,700,11,280,IEC 60228,1000
+COM-12PA-UNARM-PB,12 Pair Unarmoured Copper Cable,Communication Cable,Multi-pair Unarmoured,N,12 Pairs,Copper ATC,7/0.27 mm,IEC 60228,MDPE,0.4,FR PVC,1.5,None,Al-Foil + Drain Wire,700,110,5000,700,12.5,300,IEC 60228,1000
+COM-12PA-ARM-CM,12 Pair Armoured Communication Cable,Communication Cable,Multi-pair Armoured,Y,12 Pairs,Copper ATC,7/0.28 mm,IEC 60228,MDPE,0.42,FR PVC,2.1,GI Flat Strip,Al-Mylar Tape,750,108,5200,750,13,310,IEC 60228,1000
+COM-8PA-ARM-PB,8 Pair Armoured Copper Cable,Communication Cable,Multi-pair Armoured,Y,8 Pairs,Copper ATC,7/0.27 mm,IEC 60228,MDPE,0.4,FR PVC,2,GI Flat Strip,Al-Foil,700,112,5000,700,12.5,300,IEC 60228,1000
+COM-4PA-UNARM-PB,4 Pair Unarmoured Copper Cable,Communication Cable,Multi-pair Unarmoured,N,4 Pairs,Copper ATC,7/0.32 mm,IEC 60228,MDPE,0.4,FR PVC,1,None,Al-Foil + Drain Wire,700,37.1,2000,700,10,300,IEC 60228,1000
+COM-4PA-UNARM-DL,4 Pair Telephone Cable,Communication Cable,Multi-pair Unarmoured,N,4 Pairs,Copper,7/0.30 mm,IEC 60228,Polyethylene,0.38,FR PVC,0.9,None,Al-Foil,700,39,1800,700,9,270,IEC 60228,1000
+COM-4PA-ARM-PB,4 Pair Armoured Copper Cable,Communication Cable,Multi-pair Armoured,Y,4 Pairs,Copper ATC,7/0.32 mm,IEC 60228,MDPE,0.4,FR PVC,1.8,GI Flat Strip,Al-Foil,700,37.1,2000,700,10,300,IEC 60228,1000
+COM-18PA-ARM-PB,18 Pair Armoured Copper Cable,Communication Cable,Multi-pair Armoured,Y,18 Pairs,Copper ATC,7/0.27 mm,IEC 60228,MDPE,0.4,FR PVC,2,GI Flat Strip,Al-Foil + Drain Wire,700,40,5000,700,10,300,IEC 60228,1000
+COM-18PA-ARM-CM,18 Pair Communication Cable,Communication Cable,Multi-pair Armoured,Y,18 Pairs,Copper,7/0.26 mm,IEC 60228,MDPE,0.38,FR PVC,1.9,GI Wire,Al-Foil,700,42,4800,700,9.5,290,IEC 60228,1000
+COM-18PA-UNARM-PB,18 Pair Unarmoured Copper Cable,Communication Cable,Multi-pair Unarmoured,N,18 Pairs,Copper ATC,7/0.27 mm,IEC 60228,MDPE,0.4,FR PVC,1.5,None,Al-Foil,700,40,5000,700,10,300,IEC 60228,1000
+DATA-CAT6-ARM-PB,Armoured Cat6 STP Cable,Data Cable,Cat6 Armoured,Y,4 Pairs,Copper,23 AWG,IEC 60228,HDPE,0.6,FR PVC,1.8,ECCS Tape,Al-Foil + Braid,250,95,10000,700,12,200,IEC 61156/ISO 11801,305
+DATA-CAT6-ARM-DL,Cat6 Shielded Armoured Cable,Data Cable,Cat6 Armoured,Y,4 Pairs,Copper,23 AWG,IEC 60228,HDPE,0.55,LSZH,1.7,ECCS Tape,Al-Foil,250,98,9500,700,11,190,IEC 61156,305
+DATA-CAT6-UNARM-PB,Cat6 Unshielded Cable,Data Cable,Cat6 Unarmoured,N,4 Pairs,Copper,23 AWG,IEC 60228,HDPE,0.6,FR PVC,1,None,UTP,250,95,10000,700,12,200,IEC 61156,305
+DATA-CAT6-STP-PB,Cat6 STP Cable,Data Cable,Cat6 Shielded,N,4 Pairs,Copper,23 AWG,IEC 60228,HDPE,0.6,FR PVC,1.2,None,Al-Foil + Braid,250,95,10000,700,12,200,IEC 61156,305
+DATA-CAT5E-ARM-PB,Armoured Cat5e Cable,Data Cable,Cat5e Armoured,Y,4 Pairs,Copper,24 AWG,IEC 60228,HDPE,0.5,FR PVC,1.8,GI Strip,Al-Foil,250,110,8000,700,10,180,IEC 61156,305
+WIRE-PTFE-16-PB,PTFE Insulated Equipment Wire 16AWG,Equipment Wire,PTFE Wire,N,Single Core,Silver Coated Copper,19/0.29 mm,MIL-W-22759,PTFE,0.3,None,None,None,None,250,13.2,10000,500,20,250,MIL-W-22759,100
+WIRE-PTFE-20-PB,PTFE Insulated Equipment Wire 20AWG,Equipment Wire,PTFE Wire,N,Single Core,Silver Coated Copper,19/0.20 mm,MIL-W-22759,PTFE,0.25,None,None,None,None,250,33.3,10000,500,20,250,MIL-W-22759,100
+WIRE-PTFE-24-PB,PTFE Insulated Equipment Wire 24AWG,Equipment Wire,PTFE Wire,N,Single Core,Silver Coated Copper,19/0.13 mm,MIL-W-22759,PTFE,0.2,None,None,None,None,250,84.2,10000,500,20,250,MIL-W-22759,100
+WIRE-PTFE-16-DL,Teflon Wire 16AWG,Equipment Wire,PTFE Wire,N,Single Core,Nickel Copper,19/0.29 mm,MIL-W-22759,PTFE,0.28,None,None,None,None,250,14,9500,500,18,230,MIL-W-22759,100
+WIRE-PTFE-20-DL,Teflon Wire 20AWG,Equipment Wire,PTFE Wire,N,Single Core,Nickel Copper,19/0.20 mm,MIL-W-22759,PTFE,0.23,None,None,None,None,250,35,9500,500,18,230,MIL-W-22759,100
+WIRE-PVC-16-PB,PVC Insulated Wire 16AWG,Equipment Wire,PVC Wire,N,Single Core,Copper,19/0.29 mm,IS 694,PVC,0.8,PVC,0.8,None,None,750,13.5,5000,1000,15,200,IS 694,100
+WIRE-PVC-20-PB,PVC Insulated Wire 20AWG,Equipment Wire,PVC Wire,N,Single Core,Copper,19/0.20 mm,IS 694,PVC,0.6,PVC,0.6,None,None,750,34,5000,1000,15,200,IS 694,100
+PWR-4C-ARM-PB,4 Core Armoured Power Cable,Power Cable,Multi-core Armoured,Y,4 Cores,Copper,19/1.53 mm,IS 1554,XLPE,1.2,ST2 PVC,2.2,GI Strip,None,1100,1.2,1000,3000,12,200,IS 1554,500
+PWR-3C-ARM-PB,3 Core Armoured Power Cable,Power Cable,Multi-core Armoured,Y,3 Cores,Copper,19/1.53 mm,IS 1554,XLPE,1.2,ST2 PVC,2,GI Strip,None,1100,1.2,1000,3000,12,200,IS 1554,500
+PWR-2C-ARM-PB,2 Core Armoured Power Cable,Power Cable,Multi-core Armoured,Y,2 Cores,Copper,19/1.53 mm,IS 1554,XLPE,1.2,ST2 PVC,1.8,GI Strip,None,1100,1.2,1000,3000,12,200,IS 1554,500
+COM-6PA-ARM-PB,6 Pair Armoured Copper Cable,Communication Cable,Multi-pair Armoured,Y,6 Pairs,Copper ATC,7/0.27 mm,IEC 60228,MDPE,0.4,FR PVC,1.8,GI Flat Strip,Al-Foil,700,115,5000,700,12.5,300,IEC 60228,1000
+DATA-FIBER-ARM-PB,6 Core Armoured Fiber Cable,Fiber Optic,Fiber Armoured,Y,6 Cores,Glass Fiber,9/125 µm,IEC 60793,Acrylate,0.25,LSZH,2,GI Strip,Kevlar,NA,NA,NA,NA,40,NA,IEC 60793,1000
+INST-2C-SCREEN-PB,2 Core Screened Instrument Cable,Instrument Cable,Screened Cable,N,2 Cores,Copper ATC,7/0.2 mm,IS 1554,PVC,0.8,PVC,1.5,None,Cu Braid,300,90,1000,1000,10,180,IS 1554,500
+FLEX-5C-ARM-PB,5 Core Flexible Armoured Cable,Flexible Cable,Multi-core Flexible,Y,5 Cores,Copper Stranded,84/0.3 mm,IS 694,EPR,1,CR PVC,2,GI Strip,None,500,2.5,500,1500,15,350,IS 694,200
+COAX-RG6-ARM-PB,Armoured Coaxial Cable RG6,Coaxial,Coaxial Armoured,Y,1 Core,Copper,1.02 mm,IEC 61196,PE,2.8,PE,5.5,GI Strip,Cu Braid,3000,15,5000,3000,18,200,IEC 61196,500
+AUDIO-4C-PB,4 Core Audio Cable,Audio,Multi-core Unarmoured,N,4 Cores,Copper OFC,0.12 mm sq,NA,PVC,0.5,PVC,1.2,None,Spiral Shield,50,80,100,50,8,150,NA,100
+RAIL-8C-ARM-PB,8 Core Railway Signalling Cable,Railway,Multi-core Armoured,Y,8 Cores,Copper ATC,1.5 mm²,EN 50264,XLPE,1,LSZH,2.5,GI Strip,Al-Foil,1500,12.1,10000,3000,20,250,EN 50264,500
+SOLAR-2C-PB,2 Core Solar DC Cable,Solar,Multi-core Unarmoured,N,2 Cores,Copper Tinned,6 mm²,EN 50618,XLPE,1.2,LSZH,1.5,None,None,1500,3.08,1000,6000,15,200,EN 50618,100

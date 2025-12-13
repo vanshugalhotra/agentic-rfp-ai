@@ -1,0 +1,6 @@
+Test_Name,Applicable_To,Test_Cost_Rs
+Routine Test,All Cables,5000
+Acceptance Test,All Cables,12000
+High Voltage Test,>=11kV Cables,25000
+Insulation Resistance Test,All Cables,6000
+Mechanical Test,All Cables,8000
