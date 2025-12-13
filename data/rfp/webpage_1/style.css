@@ -1,0 +1,141 @@
+:root {
+  --green: #2e8b2e;
+  --light-green: #5fb760;
+  --blue: #0b66c3;
+  --gray: #f4f6f8;
+  --border: #dcdcdc;
+  --text: #222;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: #fff;
+  color: var(--text);
+}
+
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 16px;
+}
+
+/* ===== HEADER ===== */
+header {
+  border-bottom: 1px solid var(--border);
+}
+
+.top-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 16px;
+}
+
+.logo-img {
+  height: 65px;
+  width: auto;
+}
+
+.company-title {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* ===== NAVBAR ===== */
+nav {
+  background: var(--green);
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+nav li {
+  padding: 12px 16px;
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+nav li:hover {
+  background: rgba(255,255,255,0.15);
+}
+
+/* ===== SECTION TITLES ===== */
+.section-title {
+  background: var(--green);
+  color: #fff;
+  padding: 10px 14px;
+  font-weight: 600;
+  margin-top: 24px;
+}
+
+.section-title.green {
+  background: var(--light-green);
+}
+
+/* ===== TABLES ===== */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+th, td {
+  border: 1px solid var(--border);
+  padding: 10px;
+  font-size: 14px;
+}
+
+th {
+  background: var(--gray);
+  font-weight: 600;
+}
+
+/* ===== BUTTON ===== */
+.download-btn {
+  display: inline-block;
+  background: #7b3fe4;
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 4px;
+  margin-top: 10px;
+  text-decoration: none;
+}
+
+.download-btn:hover {
+  background: #6331c8;
+}
+
+/* ===== FOOTER ===== */
+footer {
+  margin-top: 40px;
+  padding: 16px;
+  background: #f0f0f0;
+  text-align: center;
+  font-size: 13px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  nav ul {
+    flex-direction: column;
+  }
+
+  .top-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .logo-img {
+    height: 45px;
+  }
+}
