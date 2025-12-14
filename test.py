@@ -5,6 +5,9 @@ from agents.main_agent.src.parse import (
     build_product_table,
     export_product_table_to_csv
 )
+from agents.main_agent.src.resolve.resolver import resolve_rfp_summaries
+from core.llm.ollama_client import OllamaLLM
+
 
 print("\n================ MAIN AGENT TEST START ================\n")
 
@@ -74,5 +77,25 @@ if csv_path:
     print(f"CSV successfully generated at: {csv_path}")
 else:
     print("CSV not generated (no product data).")
+
+# ------------------------------------------------------
+# Step 6: Resolver (LLM-based Summaries)
+# ------------------------------------------------------
+print("\n--- Resolver Output (LLM Summaries) ---")
+
+# Initialize LLM client (do NOT modify ollama_client.py)
+llm = OllamaLLM(model="llama3.2")
+
+summaries = resolve_rfp_summaries(
+    llm_client=llm,
+    product_table=product_table,
+    testing_text=relevant_text["testing_text"]
+)
+
+print("\n[Technical Summary for Technical Agent]")
+print(summaries["technical_summary"])
+
+print("\n[Pricing Summary for Pricing Agent]")
+print(summaries["pricing_summary"])
 
 print("\n================ MAIN AGENT TEST END =================\n")

@@ -1,121 +1,88 @@
-from typing import List, Dict
+import re
 import csv
 import os
+from typing import List, Dict
 
 
 def build_product_table(technical_text: List[str]) -> List[Dict]:
-    """
-    Builds a structured product table from extracted technical text.
-
-    - Each product is grouped based on section headers (e.g., 4.1, 4.2, Item 1, Item 2)
-    - Extracts only common, high-signal attributes
-    - Preserves raw technical text for downstream resolution
-    """
-
     products = []
-    current_product = {}
+    current_product = None
     current_block = []
     item_id = 1
 
-    def finalize_current_product():
-        nonlocal item_id, current_product, current_block
+    def finalize():
+        nonlocal current_product, current_block, item_id
         if current_product:
             current_product["rfp_item_id"] = item_id
             current_product["raw_block"] = current_block
             products.append(current_product)
             item_id += 1
-        current_product = {}
+        current_product = None
         current_block = []
 
     for line in technical_text:
-        clean_line = line.strip()
-
-        if not clean_line:
+        line = line.strip()
+        if not line:
             continue
 
-        # Detect new product section headers
-        # Examples: "4.1 Instrumentation Cable", "4.2 33 kV XLPE Cable", "Item 1"
-        header_token = clean_line.split()[0].replace(".", "")
-        if header_token.isdigit() or clean_line.lower().startswith("item"):
-            finalize_current_product()
-            current_block.append(clean_line)
+        # --- Section header detection ---
+        header_match = re.match(r"^\d+\.\d+\s+(.*)", line)
+        if header_match:
+            finalize()
+            current_product = {
+                "category": header_match.group(1)
+            }
+            current_block.append(line)
             continue
 
-        current_block.append(clean_line)
+        if not current_product:
+            continue
 
-        # Rule-based attribute extraction (INTENTIONALLY LIMITED)
-        if "Category" in clean_line:
-            current_product["category"] = clean_line.split("Category")[-1].strip()
+        current_block.append(line)
+        text = line.lower()
 
-        elif "Cable Type" in clean_line:
-            current_product["cable_type"] = clean_line.split("Cable Type")[-1].strip()
+        # --- Attribute extraction ---
+        if "xlpe" in text:
+            current_product["cable_type"] = "XLPE Insulated"
+        elif "pvc" in text:
+            current_product["cable_type"] = "PVC Insulated"
 
-        elif "Armored" in clean_line or "Armoured" in clean_line:
-            current_product["armored"] = clean_line.split()[-1].strip()
+        if "armour" in text:
+            current_product["armored"] = "Yes" if "unarm" not in text else "No"
 
-        elif "Conductor Material" in clean_line:
-            current_product["conductor_material"] = clean_line.split("Conductor Material")[-1].strip()
+        if "aluminium" in text:
+            current_product["conductor_material"] = "Aluminium"
+        elif "copper" in text:
+            current_product["conductor_material"] = "Copper"
 
-        elif "Conductor Size" in clean_line:
-            current_product["conductor_size"] = clean_line.split("Conductor Size")[-1].strip()
+        size_match = re.search(r"(\d+(\.\d+)?)\s*sqmm", text)
+        if size_match:
+            current_product["conductor_size"] = f"{size_match.group(1)} sqmm"
 
-        elif "Insulation Material" in clean_line:
-            current_product["insulation_material"] = clean_line.split("Insulation Material")[-1].strip()
+        voltage_match = re.search(r"(\d+\.?\d*)\s*kV", text, re.I)
+        if voltage_match:
+            current_product["voltage_rating"] = f"{voltage_match.group(1)} kV"
 
-        elif "Sheath Material" in clean_line:
-            current_product["sheath_material"] = clean_line.split("Sheath Material")[-1].strip()
+        if "standard" in text or "iec" in text or "is " in text:
+            current_product["standards"] = line.split(":")[-1].strip()
 
-        elif "Voltage Rating" in clean_line or "Rated Voltage" in clean_line:
-            current_product["voltage_rating"] = clean_line.split()[-2] + " " + clean_line.split()[-1]
-
-        elif "Applicable Standards" in clean_line or "Standards" in clean_line:
-            current_product["standards"] = clean_line.split("Standards")[-1].strip()
-
-    # Final product flush
-    finalize_current_product()
-
+    finalize()
     return products
 
 
-def export_product_table_to_csv(product_table: List[Dict], tender_reference: str):
-    """
-    Exports product table to CSV for demo / inspection.
-    This is a Main Agent utility and NOT used by downstream agents.
-    """
-
-    if not product_table:
+def export_product_table_to_csv(products: List[Dict], tender_ref: str):
+    if not products:
         return None
 
-    output_dir = "data/outputs"
-    os.makedirs(output_dir, exist_ok=True)
+    os.makedirs("data/outputs", exist_ok=True)
+    path = f"data/outputs/rfp_products_{tender_ref}.csv"
 
-    file_path = os.path.join(
-        output_dir,
-        f"rfp_products_{tender_reference}.csv"
-    )
+    keys = sorted({k for p in products for k in p.keys()})
 
-    # Keep CSV clean; raw_block is internal only
-    fieldnames = [
-        "rfp_item_id",
-        "category",
-        "cable_type",
-        "armored",
-        "conductor_material",
-        "conductor_size",
-        "insulation_material",
-        "sheath_material",
-        "voltage_rating",
-        "standards"
-    ]
-
-    with open(file_path, mode="w", newline="", encoding="utf-8") as csvfile:
-        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+    with open(path, "w", newline="", encoding="utf-8") as f:
+        writer = csv.DictWriter(f, fieldnames=keys)
         writer.writeheader()
+        for p in products:
+            writer.writerow(p)
 
-        for product in product_table:
-            writer.writerow({
-                key: product.get(key, "")
-                for key in fieldnames
-            })
-
-    return file_path
+    return path
