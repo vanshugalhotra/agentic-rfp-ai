@@ -3,42 +3,72 @@ from agents.main_agent import run_main_agent
 from agents.technical_agent import run_technical_agent
 
 
-print("\n================ MAIN AGENT TEST START ================\n")
+print("\n================ AGENTIC RFP PIPELINE TEST START ================\n")
 
 # ------------------------------------------------------
 # Step 1: Run Sales Agent
 # ------------------------------------------------------
+print(">> Running Sales Agent...")
 rfp = run_sales_agent()
 
 if not rfp:
     raise ValueError("Sales Agent did not return an RFP")
 
-<<<<<<< HEAD
+print("✔ Selected RFP:", rfp.get("tender_reference"))
 
-=======
->>>>>>> 75f4f25f85f9df3ba6c585ff833efd005c8786fe
+
 # ------------------------------------------------------
 # Step 2: Run Main Agent
 # ------------------------------------------------------
+print("\n>> Running Main Agent...")
 main_result = run_main_agent(rfp)
 
+if not main_result:
+    raise ValueError("Main Agent failed")
+
+print("✔ Main Agent completed")
+
+
 # ------------------------------------------------------
-# Step 3: Run Technical Agent
+# Step 3: Run Technical Agent (Step 1 only for now)
 # ------------------------------------------------------
+print("\n>> Running Technical Agent (Step 1 – validation & OEM load)...")
 technical_result = run_technical_agent(main_result)
 
+print("✔ Technical Agent executed")
+
+
 # ------------------------------------------------------
-# Step 4: Display Outputs (test-only)
+# Step 4: Display Outputs (TEST ONLY)
 # ------------------------------------------------------
-print("RFP Reference    :", main_result["rfp_metadata"].get("tender_reference"))
+print("\n================ PIPELINE OUTPUTS ================\n")
 
-print("\n--- Main Agent: Technical Summary ---")
-print(main_result.get("technical_summary", "No technical summary generated"))
+# ---- RFP Info ----
+print("RFP Reference :", main_result["rfp_metadata"].get("tender_reference"))
+print("PDF Path      :", main_result["rfp_metadata"].get("rfp_pdf_path"))
 
-print("\n--- Main Agent: Pricing Summary ---")
-print(main_result.get("pricing_summary", "No pricing summary generated"))
+# ---- Main Agent Summaries ----
+print("\n--- Main Agent : Technical Summary ---")
+print(main_result.get("technical_summary", "❌ No technical summary generated"))
 
-print("\n--- Technical Agent Output ---")
-print(technical_result)
+print("\n--- Main Agent : Pricing Summary ---")
+print(main_result.get("pricing_summary", "❌ No pricing summary generated"))
 
-print("\n================ MAIN AGENT TEST END =================\n")
+print("\n--- Main Agent : Product Table Path ---")
+print(main_result.get("product_csv", "❌ No product CSV generated"))
+
+# ---- Technical Agent Output ----
+print("\n--- Technical Agent : OEM Recommendations ---")
+
+for item in technical_result["rfp_items"]:
+    print(f"\nRFP Item ID : {item['rfp_item_id']}")
+    print(f"Category    : {item['category']}")
+    print("Top 3 OEM Recommendations:")
+
+    for idx, oem in enumerate(item["top_oem_recommendations"], start=1):
+        print(f"  {idx}. SKU          : {oem['sku']}")
+        print(f"     Product Name : {oem['product_name']}")
+        print(f"     Match Score  : {oem['score']}%")
+
+
+print("\n================ TEST END =================\n")

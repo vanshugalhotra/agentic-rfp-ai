@@ -70,6 +70,7 @@ def run_main_pipeline(rfp: dict) -> dict:
             "num_pages": pdf_data["num_pages"]
         },
         "product_table": product_table,
+        "product_csv": csv_path,  
         "technical_summary": summaries["technical_summary"],
         "pricing_summary": summaries["pricing_summary"]
     }

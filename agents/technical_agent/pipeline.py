@@ -1,56 +1,62 @@
-import os
-import sys
+# agents/technical_agent/pipeline.py
 
-project_root = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
+from agents.technical_agent.src.validate_input import validate_technical_input
+from agents.technical_agent.src.load_oem import load_oem_products
+from agents.technical_agent.src.normalize_specs import normalize_spec_block_llm
+from agents.technical_agent.src.select_top_oem import select_top_oem_products
+from agents.technical_agent.src.normalize_oem import normalize_oem_product
+from core.llm.ollama_client import OllamaLLM
 
-from agents.technical_agent.src.load_data import load_oem_datasheet
-from agents.technical_agent.src.normalize_rfp_spec import normalize_rfp_specs
-from agents.technical_agent.src.filter_compliant_skus import filter_compliant_skus
+OEM_CSV_PATH = "data/oem_products.csv"
 
 
-def run_technical_pipeline(main_agent_output: dict) -> dict:
-    """
-    Core pipeline for Technical Agent.
+def run_technical_pipeline(main_result: dict) -> dict:
 
-    Receives structured RFP understanding from Main Agent and
-    performs OEM SKU matching and recommendation.
+    # Step 1: Validate
+    rfp_products = validate_technical_input(main_result)
+    # Re-index RFP items sequentially (1, 2, ...)
+    for idx, product in enumerate(rfp_products, start=1):
+        product["rfp_item_id"] = idx
 
-    This pipeline will be incrementally implemented.
-    """
 
-    if not main_agent_output:
-        raise ValueError("Invalid input to Technical Agent")
+    # Step 2: Load OEM
+    raw_oem_products = load_oem_products(OEM_CSV_PATH)
+    oem_products = [normalize_oem_product(oem) for oem in raw_oem_products]
 
-    product_table = main_agent_output.get("product_table")
-    technical_summary = main_agent_output.get("technical_summary")
 
-    if not product_table or not technical_summary:
-        raise ValueError(
-            "Technical Agent requires product_table and technical_summary"
-        )
+    # Step 3: Normalize (AI)
+    llm = OllamaLLM(model="llama3.2")
+    normalized_products = []
 
-    # --------------------------------------------------
-    # Step 1: Load OEM product datasheets
-    # --------------------------------------------------
-    datasheets = load_oem_datasheet()
+    for product in rfp_products:
+        raw_text = "\n".join(product.get("raw_block", []))
+        normalized = normalize_spec_block_llm(llm, raw_text)
 
-    # --------------------------------------------------
-    # Step 2: Normalize RFP specs
-    # --------------------------------------------------
-    rfp_specs = normalize_rfp_specs(product_table, technical_summary)
+        normalized = normalize_spec_block_llm(llm, raw_text)
+        
+        if not normalized or not isinstance(normalized, dict):
+            normalized = {}
 
-    rfp_results = []
+        normalized_products.append({
+            "rfp_item_id": product.get("rfp_item_id"),
+            "category": product.get("category"),
+            "normalized_specs": normalized,
+            "raw_product": product
+        })
 
-    for rfp_item in rfp_specs:
-        compliant, rejected = filter_compliant_skus(rfp_item, datasheets)
+    # Step 4: Match & Rank OEMs
+    recommendations = []
 
-        rfp_results.append({
-            "rfp_item_id": rfp_item["rfp_item_id"],
-            "compliant_skus": [sku["sku"] for sku in compliant],
-            "rejected_count": len(rejected)
+    for rfp in normalized_products:
+        top_oems = select_top_oem_products(rfp, oem_products)
+
+        recommendations.append({
+            "rfp_item_id": rfp["rfp_item_id"],
+            "category": rfp["category"],
+            "top_oem_recommendations": top_oems
         })
 
     return {
-        "rfp_items": rfp_results,
-        "status": "Technical Agent hard-gate matching completed"
+        "status": "Technical Agent Step 4 completed",
+        "rfp_items": recommendations
     }

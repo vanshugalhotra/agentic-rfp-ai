@@ -1,3 +1,3 @@
-from .technical_agent import run_technical_agent
+# agents/technical_agent/__init__.py
 
-__all__ = ["run_technical_agent"]
+from .technical_agent import run_technical_agent

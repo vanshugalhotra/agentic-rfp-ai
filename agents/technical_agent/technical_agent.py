@@ -1,17 +1,10 @@
-from .pipeline import run_technical_pipeline
+# agents/technical_agent/technical_agent.py
+
+from agents.technical_agent.pipeline import run_technical_pipeline
 
 
-def run_technical_agent(main_agent_output: dict) -> dict:
+def run_technical_agent(main_result: dict) -> dict:
     """
-    Public interface for Technical Agent.
-
-    Accepts consolidated output from Main Agent and returns
-    technical recommendations for OEM SKU matching.
-
-    Input:
-    - main_agent_output: dict containing product_table and technical_summary
-
-    Output:
-    - Technical Agent result (SKU recommendations, comparison tables, etc.)
+    Entry point for Technical Agent
     """
-    return run_technical_pipeline(main_agent_output)
+    return run_technical_pipeline(main_result)
