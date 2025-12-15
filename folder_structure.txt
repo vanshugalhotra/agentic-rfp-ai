@@ -1,0 +1,122 @@
+
+C:.
+|   .gitignore
+|   config.py
+|   folder_structure.txt
+|   README.md
+|   requirements.txt
+|   test.py
+|   __init__.py
+|   
++---agents
+|   |   __init__.py
+|   |   
+|   +---main_agent
+|   |   \---src
+|   |       |   load_pdf.py
+|   |       |   parse.py
+|   |       |   summary.py
+|   |       |   __init__.py
+|   |       |   
+|   |       \---resolve
+|   |               prompt.py
+|   |               resolver.py
+|   |               __init__.py
+|   |               
+|   +---sales_agent
+|   |   |   pipeline.py
+|   |   |   sales_agent.py
+|   |   |   urls.txt
+|   |   |   __init__.py
+|   |   |   
+|   |   +---src
+|   |   |   |   download_pdf.py
+|   |   |   |   fetch_html.py
+|   |   |   |   parse_html.py
+|   |   |   |   __init__.py
+|   |   |   |   
+|   |   |   +---resolve_metadata
+|   |   |   |   |   normalize_metadata.py
+|   |   |   |   |   prompt.py
+|   |   |   |   |   resolver.py
+|   |   |   |   |   __init__.py
+|   |   |   |   |   
+|   |   |   |   \---__pycache__
+|   |   |   |           normalize_metadata.cpython-312.pyc
+|   |   |   |           prompt.cpython-312.pyc
+|   |   |   |           resolver.cpython-312.pyc
+|   |   |   |           __init__.cpython-312.pyc
+|   |   |   |           
+|   |   |   \---__pycache__
+|   |   |           download_pdf.cpython-312.pyc
+|   |   |           fetch_html.cpython-312.pyc
+|   |   |           parse_html.cpython-312.pyc
+|   |   |           __init__.cpython-312.pyc
+|   |   |           
+|   |   \---__pycache__
+|   |           pipeline.cpython-312.pyc
+|   |           sales_agent.cpython-312.pyc
+|   |           __init__.cpython-312.pyc
+|   |           
+|   \---__pycache__
+|           __init__.cpython-312.pyc
+|           
++---core
+|   |   __init__.py
+|   |   
+|   +---llm
+|   |   |   base.py
+|   |   |   ollama_client.py
+|   |   |   __init__.py
+|   |   |   
+|   |   \---__pycache__
+|   |           base.cpython-312.pyc
+|   |           ollama_client.cpython-312.pyc
+|   |           __init__.cpython-312.pyc
+|   |           
+|   \---__pycache__
+|           __init__.cpython-312.pyc
+|           
++---data
+|   |   product.csv
+|   |   product_pricing.csv
+|   |   test_pricing.csv
+|   |   
+|   +---downloads
+|   +---outputs
+|   |       .gitkeep
+|   |       rfp_products_RFP-IND-CABLE-2025-02.csv
+|   |       
+|   \---rfp
+|       |   rfp_1.pdf
+|       |   rfp_2.pdf
+|       |   rfp_3.pdf
+|       |   
+|       +---webpage_1
+|       |   |   index.html
+|       |   |   logo.png
+|       |   |   style.css
+|       |   |   
+|       |   \---documents
+|       |           RFP.pdf
+|       |           RFP.zip
+|       |           
+|       +---webpage_2
+|       |   |   index.html
+|       |   |   logo.png
+|       |   |   style.css
+|       |   |   
+|       |   \---documents
+|       |           RFP_2.pdf
+|       |           
+|       \---webpage_3
+|           |   index.html
+|           |   logo.png
+|           |   style.css
+|           |   
+|           \---documents
+|                   NIT-CABLE-IND-2025-03.pdf
+|                   
+\---__pycache__
+        config.cpython-312.pyc
+        
