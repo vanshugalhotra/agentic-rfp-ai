@@ -11,21 +11,22 @@ from agents.main_agent.src.parse import (
     export_product_table_to_csv
 )
 from agents.main_agent.src.resolve.resolver import resolve_rfp_summaries
+from agents.technical_agent import run_technical_agent
 from core.llm.ollama_client import OllamaLLM
 
 
 def run_main_pipeline(rfp: dict) -> dict:
     """
     Core pipeline for Main Agent.
-    Accepts selected RFP metadata from Sales Agent and orchestrates
-    downstream processing for Technical and Pricing Agents.
+    - Orchestrates Sales → Technical → (Pricing later)
+    - Acts as the single source of truth
     """
 
     if not rfp or "rfp_pdf_path" not in rfp:
         raise ValueError("Invalid RFP input to Main Agent")
 
     # -------------------------------
-    # Step 1: Load PDF
+    # Step 1: Load RFP PDF
     # -------------------------------
     pdf_data = load_rfp_pdf(rfp["rfp_pdf_path"])
 
@@ -42,7 +43,7 @@ def run_main_pipeline(rfp: dict) -> dict:
     )
 
     # -------------------------------
-    # Step 4: Export CSV (utility)
+    # Step 4: Export product table CSV
     # -------------------------------
     csv_path = export_product_table_to_csv(
         product_table,
@@ -50,7 +51,7 @@ def run_main_pipeline(rfp: dict) -> dict:
     )
 
     # -------------------------------
-    # Step 5: Generate summaries (LLM)
+    # Step 5: Generate summaries (AI)
     # -------------------------------
     llm = OllamaLLM(model="llama3.2")
 
@@ -59,6 +60,14 @@ def run_main_pipeline(rfp: dict) -> dict:
         product_table=product_table,
         testing_text=relevant_text["testing_text"]
     )
+
+    # -------------------------------
+    # Step 6: Run Technical Agent
+    # -------------------------------
+    technical_output = run_technical_agent({
+        "rfp_metadata": rfp,
+        "product_table": product_table
+    })
 
     # -------------------------------
     # Final consolidated output
@@ -70,7 +79,8 @@ def run_main_pipeline(rfp: dict) -> dict:
             "num_pages": pdf_data["num_pages"]
         },
         "product_table": product_table,
-        "product_csv": csv_path,  
+        "product_csv": csv_path,
         "technical_summary": summaries["technical_summary"],
-        "pricing_summary": summaries["pricing_summary"]
+        "pricing_summary": summaries["pricing_summary"],
+        "technical_recommendations": technical_output
     }
