@@ -1,88 +1,143 @@
-import re
 import csv
 import os
+import re
 from typing import List, Dict
 
 
+# ---------------------------------------------------------
+# UTILITIES
+# ---------------------------------------------------------
+def sanitize_filename(text: str) -> str:
+    """
+    Makes a string safe to use as a filename.
+    """
+    return (
+        text.replace("/", "_")
+            .replace("\\", "_")
+            .replace(" ", "_")
+            .replace(":", "_")
+    )
+
+
+# ---------------------------------------------------------
+# PRODUCT TABLE BUILDER
+# ---------------------------------------------------------
 def build_product_table(technical_text: List[str]) -> List[Dict]:
+    """
+    Builds a structured product table from extracted technical text.
+
+    Supports:
+    - Section-based RFPs (4.1, 4.2)
+    - Item-based RFPs (Item 1, Item 2)
+    - Bullet-based specifications
+    - Free-text specification blocks
+    """
+
     products = []
-    current_product = None
+    current_product = {}
     current_block = []
     item_id = 1
 
-    def finalize():
-        nonlocal current_product, current_block, item_id
-        if current_product:
+    def finalize_product():
+        nonlocal item_id, current_product, current_block
+        if current_block:
             current_product["rfp_item_id"] = item_id
             current_product["raw_block"] = current_block
             products.append(current_product)
             item_id += 1
-        current_product = None
+        current_product = {}
         current_block = []
 
     for line in technical_text:
-        line = line.strip()
-        if not line:
+        text = line.strip()
+        if not text:
             continue
 
-        # --- Section header detection ---
-        header_match = re.match(r"^\d+\.\d+\s+(.*)", line)
-        if header_match:
-            finalize()
-            current_product = {
-                "category": header_match.group(1)
-            }
-            current_block.append(line)
+        # -------------------------------------------------
+        # Detect new product block
+        # -------------------------------------------------
+        if (
+            re.match(r"^\d+\.\d+", text) or
+            re.match(r"^item\s+\d+", text, re.I)
+        ):
+            finalize_product()
+            current_block.append(text)
+
+            current_product["category"] = text
             continue
 
-        if not current_product:
-            continue
+        current_block.append(text)
+        lower = text.lower()
 
-        current_block.append(line)
-        text = line.lower()
-
-        # --- Attribute extraction ---
-        if "xlpe" in text:
+        # -------------------------------------------------
+        # Attribute extraction (heuristics, NOT brittle)
+        # -------------------------------------------------
+        if "xlpe" in lower:
             current_product["cable_type"] = "XLPE Insulated"
-        elif "pvc" in text:
+        elif "pvc" in lower:
             current_product["cable_type"] = "PVC Insulated"
 
-        if "armour" in text:
-            current_product["armored"] = "Yes" if "unarm" not in text else "No"
+        if "armour" in lower or "armored" in lower:
+            current_product["armored"] = "Yes"
+        elif "unarmoured" in lower or "unarmored" in lower:
+            current_product["armored"] = "No"
 
-        if "aluminium" in text:
+        if "aluminium" in lower:
             current_product["conductor_material"] = "Aluminium"
-        elif "copper" in text:
+        elif "copper" in lower:
             current_product["conductor_material"] = "Copper"
 
-        size_match = re.search(r"(\d+(\.\d+)?)\s*sqmm", text)
+        size_match = re.search(r"(\d+(\.\d+)?)\s*sqmm", lower)
         if size_match:
             current_product["conductor_size"] = f"{size_match.group(1)} sqmm"
 
-        voltage_match = re.search(r"(\d+\.?\d*)\s*kV", text, re.I)
+        voltage_match = re.search(r"(\d+(\.\d+)?)\s*(k?v)", lower)
         if voltage_match:
-            current_product["voltage_rating"] = f"{voltage_match.group(1)} kV"
+            unit = voltage_match.group(3).upper()
+            current_product["voltage_rating"] = f"{voltage_match.group(1)} {unit}"
 
-        if "standard" in text or "iec" in text or "is " in text:
-            current_product["standards"] = line.split(":")[-1].strip()
+        if "iec" in lower or "is " in lower or "bs " in lower:
+            current_product["standards"] = text
 
-    finalize()
+    finalize_product()
     return products
 
 
-def export_product_table_to_csv(products: List[Dict], tender_ref: str):
-    if not products:
+# ---------------------------------------------------------
+# CSV EXPORTER
+# ---------------------------------------------------------
+def export_product_table_to_csv(
+    product_table: List[Dict],
+    tender_reference: str,
+    output_dir: str = "data/outputs"
+) -> str | None:
+    """
+    Exports product table to CSV in a filesystem-safe way.
+    """
+
+    if not product_table:
         return None
 
-    os.makedirs("data/outputs", exist_ok=True)
-    path = f"data/outputs/rfp_products_{tender_ref}.csv"
+    os.makedirs(output_dir, exist_ok=True)
 
-    keys = sorted({k for p in products for k in p.keys()})
+    safe_ref = sanitize_filename(tender_reference)
 
-    with open(path, "w", newline="", encoding="utf-8") as f:
-        writer = csv.DictWriter(f, fieldnames=keys)
+    file_path = os.path.join(
+        output_dir,
+        f"rfp_products_{safe_ref}.csv"
+    )
+
+    # Collect all unique keys dynamically
+    fieldnames = set()
+    for row in product_table:
+        fieldnames.update(row.keys())
+
+    fieldnames = sorted(fieldnames)
+
+    with open(file_path, "w", newline="", encoding="utf-8") as f:
+        writer = csv.DictWriter(f, fieldnames=fieldnames)
         writer.writeheader()
-        for p in products:
-            writer.writerow(p)
+        for row in product_table:
+            writer.writerow(row)
 
-    return path
+    return file_path
