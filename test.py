@@ -13,8 +13,6 @@ rfp = run_sales_agent()
 if not rfp:
     raise ValueError("Sales Agent did not return an RFP")
 
-
-
 # ------------------------------------------------------
 # Step 2: Run Main Agent
 # ------------------------------------------------------
