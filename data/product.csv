@@ -38,3 +38,18 @@ COAX-RG6-ARM-PB,Armoured Coaxial Cable RG6,Coaxial,Coaxial Armoured,Y,1 Core,Cop
 AUDIO-4C-PB,4 Core Audio Cable,Audio,Multi-core Unarmoured,N,4 Cores,Copper OFC,0.12 mm sq,NA,PVC,0.5,PVC,1.2,None,Spiral Shield,50,80,100,50,8,150,NA,100
 RAIL-8C-ARM-PB,8 Core Railway Signalling Cable,Railway,Multi-core Armoured,Y,8 Cores,Copper ATC,1.5 mm²,EN 50264,XLPE,1,LSZH,2.5,GI Strip,Al-Foil,1500,12.1,10000,3000,20,250,EN 50264,500
 SOLAR-2C-PB,2 Core Solar DC Cable,Solar,Multi-core Unarmoured,N,2 Cores,Copper Tinned,6 mm²,EN 50618,XLPE,1.2,LSZH,1.5,None,None,1500,3.08,1000,6000,15,200,EN 50618,100
+CTL-30-ARM-PB,30 Core Armoured Control Cable,Control Cable,Multi-core Armoured,Y,30 Cores,Copper ATC,56/0.2 mm,IS 8130,HDPE,1.1,HR PVC,2.6,GI Flat Strip,Al-Mylar Tape + Drain Wire,1100,15.0,11000,2200,19,320,IS 8130/BS 6234,1000
+CTL-15-UNARM-PB,15 Core Unarmoured Control Cable,Control Cable,Multi-core Unarmoured,N,15 Cores,Copper ATC,28/0.2 mm,IS 8130,HDPE,0.9,HR PVC,1.5,None,Al-Mylar Tape,1100,14.0,9500,1800,16,280,IS 8130,1000
+COM-24PA-ARM-PB,24 Pair Armoured Copper Cable,Communication Cable,Multi-pair Armoured,Y,24 Pairs,Copper ATC,7/0.27 mm,IEC 60228,MDPE,0.45,FR PVC,2.2,GI Flat Strip,Al-Foil + Drain Wire,700,42,6000,800,13,320,IEC 60228,1000
+COM-24PA-UNARM-PB,24 Pair Unarmoured Copper Cable,Communication Cable,Multi-pair Unarmoured,N,24 Pairs,Copper ATC,7/0.27 mm,IEC 60228,MDPE,0.42,FR PVC,1.6,None,Al-Foil,700,40,5800,800,12,300,IEC 60228,1000
+DATA-CAT7-ARM-PB,Armoured Cat7 STP Cable,Data Cable,Cat7 Armoured,Y,4 Pairs,Copper,22 AWG,IEC 61156,HDPE,0.65,LSZH,2.0,ECCS Tape,Al-Foil + Braid,600,90,9000,700,13,210,IEC 61156/ISO 11801,305
+DATA-CAT7-UNARM-PB,Cat7 Unarmoured Cable,Data Cable,Cat7 Unarmoured,N,4 Pairs,Copper,22 AWG,IEC 61156,HDPE,0.65,FR PVC,1.5,None,UTP,600,88,8800,700,12,200,IEC 61156,305
+WIRE-PVC-12-PB,PVC Insulated Wire 12AWG,Equipment Wire,PVC Wire,N,Single Core,Copper,37/0.29 mm,IS 694,PVC,1.0,PVC,1.0,None,None,750,7.5,5000,1000,16,210,IS 694,100
+WIRE-SIL-20-PB,Silicone Insulated Wire 20AWG,Equipment Wire,Silicone Wire,N,Single Core,Copper,19/0.20 mm,IS 694,Silicone,0.5,FR PVC,0.8,None,None,750,33,5000,1000,18,220,IS 694,100
+PWR-4C-UNARM-PB,4 Core Unarmoured Power Cable,Power Cable,Multi-core Unarmoured,N,4 Cores,Copper,19/1.53 mm,IS 1554,XLPE,1.0,ST2 PVC,1.8,None,None,1100,1.3,1000,3000,12,200,IS 1554,500
+PWR-1C-ARM-PB,Single Core Armoured Power Cable,Power Cable,Single-core Armoured,Y,1 Core,Copper,19/2.5 mm,IS 1554,XLPE,1.5,ST2 PVC,2.2,GI Strip,None,1100,0.8,1000,3000,12,200,IS 1554,500
+DATA-FIBER-12-ARM-PB,12 Core Armoured Fiber Cable,Fiber Optic,Fiber Armoured,Y,12 Cores,Glass Fiber,9/125 µm,IEC 60793,Acrylate,0.25,LSZH,2.5,GI Strip,Kevlar,NA,NA,NA,NA,45,NA,IEC 60793,1000
+DATA-FIBER-24-UNARM-PB,24 Core Unarmoured Fiber Cable,Fiber Optic,Fiber Unarmoured,N,24 Cores,Glass Fiber,9/125 µm,IEC 60793,Acrylate,0.25,LSZH,1.8,None,Kevlar,NA,NA,NA,NA,50,NA,IEC 60793,1000
+FLEX-7C-ARM-PB,7 Core Flexible Armoured Cable,Flexible Cable,Multi-core Flexible,Y,7 Cores,Copper Stranded,112/0.3 mm,IS 694,EPR,1.2,CR PVC,2.2,GI Strip,None,500,3.0,500,1500,16,360,IS 694,200
+COAX-RG11-ARM-PB,Armoured Coaxial Cable RG11,Coaxial,Coaxial Armoured,Y,1 Core,Copper,1.63 mm,IEC 61196,PE,3.0,PE,6.0,GI Strip,Cu Braid,3000,9.5,5000,3000,19,210,IEC 61196,500
+AUDIO-8C-PB,8 Core Audio Cable,Audio,Multi-core Unarmoured,N,8 Cores,Copper OFC,0.18 mm sq,NA,PVC,0.6,PVC,1.4,None,Spiral Shield,50,75,100,50,9,160,NA,100
