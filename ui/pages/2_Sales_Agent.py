@@ -215,8 +215,8 @@ st.markdown("""
 # ==================================================
 st.markdown("""
 <div class="main-header">
-    <h1>🧾 Sales Agent</h1>
-    <p>Automated RFP analysis and eligibility assessment from portal URLs</p>
+    <h1>Sales Agent</h1>
+    <p>Scan portal URLs to detect RFPs due within three months, extract metadata, and evaluate eligibility.</p>
 </div>
 """, unsafe_allow_html=True)
 
@@ -226,7 +226,7 @@ init_state()
 # GUARD: No URLs
 # ==================================================
 if not st.session_state.get("urls"):
-    st.info("📋 **No URLs Submitted**  \nPlease add RFP portal URLs from the Input page to begin analysis.", icon="ℹ️")
+    st.info(" **No URLs Submitted**  \nPlease add RFP portal URLs from the Input page to begin analysis.", icon="ℹ️")
     st.stop()
 
 # ==================================================
@@ -308,7 +308,7 @@ if st.session_state.get("results"):
     if not selected:
         st.warning("⚠️ No eligible RFP found in the analyzed sources.", icon="⚠️")
     else:
-        st.success("✅ **Eligible RFP Identified**  \nRFP has been forwarded to Main Agent for orchestration.", icon="✅")
+        st.success(" **Eligible RFP Identified**  \nRFP has been forwarded to Main Agent.", icon="✅")
         
         with st.container(border=True):
             st.markdown("##### 📄 Selected RFP Details")

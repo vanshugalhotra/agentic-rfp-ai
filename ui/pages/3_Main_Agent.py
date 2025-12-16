@@ -185,7 +185,7 @@ st.markdown("""
 # GUARD: Sales Agent output
 # ==================================================
 if "results" not in st.session_state or not st.session_state.results:
-    st.info("🔒 **Prerequisites Required**  \nPlease complete the Sales Agent workflow to proceed with RFP orchestration.", icon="ℹ️")
+    st.info(" **Prerequisites Required**  \nPlease complete the Sales Agent workflow to proceed with RFP orchestration.", icon="ℹ️")
     st.stop()
 
 rfp = st.session_state.results.get("selected_rfp")
@@ -242,7 +242,7 @@ if "main_draft" not in st.session_state:
     with col1:
         st.markdown("""
         <div class="info-card">
-            <h4 style="margin-top:0;">🎯 What This Does</h4>
+            <h4 style="margin-top:0;"> What This Does</h4>
             <p style="margin-bottom:0;">Analyzes the RFP and generates role-specific context for:</p>
             <ul style="margin-bottom:0;">
                 <li><strong>Technical Agent:</strong> Product specs and scope</li>
@@ -252,12 +252,12 @@ if "main_draft" not in st.session_state:
         """, unsafe_allow_html=True)
     
     with col2:
-        if st.button("🚀 Generate Context", use_container_width=True, type="primary"):
+        if st.button(" Generate Context", use_container_width=True, type="primary"):
             with st.spinner("🔄 Analyzing RFP structure and extracting key requirements..."):
                 st.session_state.main_draft = run_main_draft(rfp)
                 st.rerun()
 else:
-    st.success("✅ Context generation completed", icon="✅")
+    st.success(" Context generation completed", icon="✅")
 
 # ==================================================
 # TECHNICAL SUMMARY REVIEW
@@ -283,11 +283,9 @@ if "main_draft" in st.session_state:
             label_visibility="collapsed"
         )
         
-        col1, col2, col3 = st.columns([2, 2, 3])
+        col2, col3 = st.columns([ 2, 3])
         
-        with col1:
-            if st.button("✏️ Reset to Original", use_container_width=True):
-                st.rerun()
+        
         
         with col2:
             if st.button("➡️ Send to Technical Agent", use_container_width=True, type="primary"):
@@ -295,7 +293,7 @@ if "main_draft" in st.session_state:
                     **draft,
                     "technical_summary": technical_summary
                 }
-                st.success("✅ Technical context approved and routed", icon="✅")
+                st.success("Technical context approved and routed", icon="✅")
                 st.balloons()
 
 # ==================================================
@@ -311,7 +309,7 @@ if "main_with_technical" in st.session_state:
     </div>
     """, unsafe_allow_html=True)
     
-    st.info("📊 **OEM Product Recommendations**  \nTop 3 matching products per RFP line item, ranked by specification match score", icon="📊")
+    st.info("**OEM Product Recommendations**  \nTop 3 matching products per RFP line item, ranked by specification match score", icon="📊")
     
     recommendations = main_result.get("technical_recommendations", [])
     
@@ -368,7 +366,7 @@ if "main_with_technical" in st.session_state:
     """, unsafe_allow_html=True)
     
     with st.container(border=True):
-        st.markdown("##### 💰 Testing & Acceptance Summary")
+        st.markdown("##### Testing & Acceptance Summary")
         st.caption("This context will be shared with the Pricing Agent for cost estimation. Ensure test requirements are clear.")
         
         pricing_summary = st.text_area(
@@ -378,11 +376,9 @@ if "main_with_technical" in st.session_state:
             label_visibility="collapsed"
         )
         
-        col1, col2, col3 = st.columns([2, 2, 3])
+        col2, col3 = st.columns([2, 3])
         
-        with col1:
-            if st.button("✏️ Reset to Original ", use_container_width=True):
-                st.rerun()
+       
         
         with col2:
             if st.button("➡️ Send to Pricing Agent", use_container_width=True, type="primary"):
@@ -390,7 +386,7 @@ if "main_with_technical" in st.session_state:
                     **st.session_state.main_with_technical,
                     "pricing_summary": pricing_summary
                 }
-                st.success("✅ Pricing context approved and routed", icon="✅")
+                st.success("Pricing context approved and routed", icon="✅")
                 st.balloons()
 
 # ==================================================
@@ -407,12 +403,12 @@ if "main_with_pricing" in st.session_state:
     st.success("""
     #### ✅ RFP Response Package Ready
     
-    All agent workflows have been completed successfully. The consolidated RFP response includes:
+    All agent workflows have been completed successfully. The final RFP response contains:
     - ✓ Technical product recommendations with match scores
-    - ✓ Detailed pricing breakdown with test costs
+    - ✓ Detailed pricing analysis
     - ✓ Complete compliance documentation
     
-    **Next Step:** Navigate to the **📊 Reports** page to review and export the final submission package.
+    **Next Step:** Proceed to the **Reports** page to review and export the final submission package.
     """, icon="🎉")
     
     # --------------------------------------------------
@@ -430,5 +426,5 @@ if "main_with_pricing" in st.session_state:
     # --------------------------------------------------
     st.session_state.final_rfp_response = final_rfp_response
     
-    if st.button("📊 View Final Report", use_container_width=True, type="primary"):
+    if st.button("View Final Report", use_container_width=True, type="primary"):
         st.switch_page("pages/6_Final_Report.py")

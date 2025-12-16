@@ -165,7 +165,7 @@ st.markdown("""
 # ==================================================
 st.markdown("""
 <div class="main-header">
-    <h1>🔗 RFP URL Submission</h1>
+    <h1> RFP URL Submission</h1>
     <p>Queue RFP URLs for automated processing and analysis</p>
 </div>
 """, unsafe_allow_html=True)
@@ -174,7 +174,7 @@ st.markdown("""
 # URL INPUT SECTION
 # ==================================================
 st.markdown('<span class="section-label">Manual URL Entry</span>', unsafe_allow_html=True)
-st.markdown('<span class="section-description">Paste RFP URLs directly into the text area</span>', unsafe_allow_html=True)
+st.markdown('<span class="section-description">Provide RFP URLs in the input area</span>', unsafe_allow_html=True)
 
 urls_text = st.text_area(
     label="Manual URL entry",
@@ -190,7 +190,7 @@ st.markdown("<br>", unsafe_allow_html=True)
 # FILE UPLOAD SECTION
 # ==================================================
 st.markdown('<span class="section-label">Upload URL List</span>', unsafe_allow_html=True)
-st.markdown('<span class="section-description">Upload a .txt file containing URLs (one per line)</span>', unsafe_allow_html=True)
+st.markdown('<span class="section-description">Upload a text file containing URLs (one per line)</span>', unsafe_allow_html=True)
 
 uploaded_file = st.file_uploader(
     label="Upload URL list",

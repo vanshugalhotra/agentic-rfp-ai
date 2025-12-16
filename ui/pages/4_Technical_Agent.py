@@ -173,7 +173,7 @@ st.markdown("""
 # ==================================================
 st.markdown("""
 <div class="main-header">
-    <h1>🧪 Technical Agent</h1>
+    <h1>Technical Agent</h1>
     <p>Intelligent product matching and specification alignment analysis</p>
 </div>
 """, unsafe_allow_html=True)
@@ -259,12 +259,12 @@ if "technical_result" not in st.session_state:
     
     with col2:
         st.markdown("<br>", unsafe_allow_html=True)
-        if st.button("🚀 Run Technical Analysis", use_container_width=True, type="primary"):
+        if st.button("Run Technical Analysis", use_container_width=True, type="primary"):
             with st.spinner("🔄 Analyzing specifications and matching against OEM catalog..."):
                 st.session_state.technical_result = run_technical_agent(main_result)
                 st.rerun()
 else:
-    st.success("✅ Technical matching completed successfully", icon="✅")
+    st.success("Technical matching completed successfully", icon="✅")
 
 # ==================================================
 # TECHNICAL RESULTS
