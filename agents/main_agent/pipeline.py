@@ -60,15 +60,6 @@ def run_main_pipeline(rfp: dict) -> dict:
         product_table=product_table,
         testing_text=relevant_text["testing_text"]
     )
-
-    # -------------------------------
-    # Step 6: Run Technical Agent
-    # -------------------------------
-    technical_output = run_technical_agent({
-        "rfp_metadata": rfp,
-        "product_table": product_table
-    })
-
     # -------------------------------
     # Final consolidated output
     # -------------------------------
@@ -82,5 +73,4 @@ def run_main_pipeline(rfp: dict) -> dict:
         "product_csv": csv_path,
         "technical_summary": summaries["technical_summary"],
         "pricing_summary": summaries["pricing_summary"],
-        "technical_recommendations": technical_output
     }

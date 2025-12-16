@@ -21,13 +21,3 @@ init_state()
 load_css()
 
 st.title("🤖 Agentic RFP Response Automation")
-
-st.sidebar.markdown("""
-### Pipeline Stages
-1. Input
-2. Sales Agent
-3. Main Agent
-4. Technical Agent
-5. Pricing Agent
-6. Final Report
-""")
