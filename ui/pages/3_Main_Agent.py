@@ -178,8 +178,8 @@ st.markdown("""
 # ==================================================
 st.markdown("""
 <div class="main-header">
-    <h1>🧠 Main Agent Orchestrator</h1>
-    <p>Intelligent coordination of RFP analysis, technical matching, and pricing synthesis</p>
+    <h1>Main Agent Orchestrator</h1>
+    <p>Central coordination layer for RFP analysis, technical validation, and pricing formulation.</p>
 </div>
 """, unsafe_allow_html=True)
 
@@ -255,7 +255,7 @@ if "main_draft" not in st.session_state:
     
     with col2:
         if st.button(" Generate Context", use_container_width=True, type="primary"):
-            with st.spinner("🔄 Analyzing RFP structure and extracting key requirements..."):
+            with st.spinner("Analyzing RFP structure and extracting key requirements..."):
                 st.session_state.main_draft = run_main_draft(rfp)
                 st.rerun()
 else:
@@ -311,7 +311,7 @@ if "main_with_technical" in st.session_state:
     </div>
     """, unsafe_allow_html=True)
     
-    st.info("**OEM Product Recommendations**  \nTop 3 matching products per RFP line item, ranked by specification match score", icon="📊")
+    st.info("**OEM Product Recommendations**  \nTop three best-fit products per RFP line item, ranked by specification alignment.", icon="📊")
     
     recommendations = main_result.get("technical_recommendations", [])
     
@@ -369,7 +369,7 @@ if "main_with_technical" in st.session_state:
     
     with st.container(border=True):
         st.markdown("##### Testing & Acceptance Summary")
-        st.caption("This context will be shared with the Pricing Agent for cost estimation. Ensure test requirements are clear.")
+        st.caption("This context will be shared with the Pricing Agent to support accurate cost estimation, ensuring testing requirements are clearly defined.")
         
         pricing_summary = st.text_area(
             "Pricing Summary",
@@ -405,10 +405,10 @@ if "main_with_pricing" in st.session_state:
     st.success("""
     #### ✅ RFP Response Package Ready
     
-    All agent workflows have been completed successfully. The final RFP response contains:
+    All agent workflows have been completed successfully. The final RFP response includes:
     - ✓ Technical product recommendations with match scores
-    - ✓ Detailed pricing analysis
-    - ✓ Complete compliance documentation
+    - ✓ Detailed commercial and pricing analysis
+    - ✓ Complete compliance and supporting documentation
     
     **Next Step:** Proceed to the **Reports** page to review and export the final submission package.
     """, icon="🎉")

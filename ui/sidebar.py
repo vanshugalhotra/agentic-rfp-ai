@@ -45,13 +45,13 @@ def app_sidebar():
         """, unsafe_allow_html=True)
 
         nav_items = [
-            ("📊", "Dashboard", "app.py", "dashboard"),
-            ("🔍", "Input Layer", "pages/1_Input.py", "input"),
-            ("💼", "Sales Agent", "pages/2_Sales_Agent.py", "sales"),
-            ("🤖", "Main Agent", "pages/3_Main_Agent.py", "main"),
-            ("⚙️", "Technical Agent", "pages/4_Technical_Agent.py", "technical"),
-            ("💰", "Pricing Agent", "pages/5_Pricing_Agent.py", "pricing"),
-            ("📄", "Final Report", "pages/6_Final_Report.py", "report"),
+            ("", "Dashboard", "app.py", "dashboard"),
+            ("", "Input Layer", "pages/1_Input.py", "input"),
+            ("", "Sales Agent", "pages/2_Sales_Agent.py", "sales"),
+            ("", "Main Agent", "pages/3_Main_Agent.py", "main"),
+            ("", "Technical Agent", "pages/4_Technical_Agent.py", "technical"),
+            ("", "Pricing Agent", "pages/5_Pricing_Agent.py", "pricing"),
+            ("", "Final Report", "pages/6_Final_Report.py", "report"),
         ]
 
         current = st.session_state.get("current_page", "dashboard")
