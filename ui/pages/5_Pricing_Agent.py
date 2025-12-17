@@ -197,8 +197,8 @@ st.markdown("""
 # ==================================================
 st.markdown("""
 <div class="main-header">
-    <h1>💰 Pricing Agent</h1>
-    <p>Comprehensive cost analysis for materials, testing, and project delivery</p>
+    <h1>Pricing Agent</h1>
+    <p>Complete cost analysis covering materials, testing, and project delivery.</p>
 </div>
 """, unsafe_allow_html=True)
 
@@ -275,7 +275,7 @@ if "pricing_result" not in st.session_state:
         <div class="info-card">
             <h4>💵 Pricing Components</h4>
             <ul>
-                <li>Material costs per selected SKU</li>
+                <li>Material costs for selected SKUs</li>
                 <li>Testing and acceptance costs</li>
                 <li>Site inspection fees</li>
                 <li>Compliance documentation</li>
@@ -298,7 +298,7 @@ if "pricing_result" not in st.session_state:
                 
                 st.rerun()
 else:
-    st.success("✅ Pricing computation completed successfully", icon="✅")
+    st.success("Pricing computation completed successfully", icon="✅")
 
 # ==================================================
 # PRICING BREAKDOWN
@@ -387,10 +387,10 @@ if "pricing_result" in st.session_state:
         with col1:
             st.markdown("##### ✅ Pricing Complete")
             st.markdown("""
-            All cost calculations have been finalized. The pricing breakdown is ready to be consolidated with technical recommendations for final RFP response.
+            All cost calculations are complete. The pricing details are ready for consolidation with technical recommendations to form the final RFP response.
             """)
         
         with col2:
             st.markdown("##### 📤 Next Steps")
-            st.info("📄 Pricing data has been automatically sent to the Main Agent for report generation", icon="✅")
-            st.caption("Navigate to the Reports page to view and export the complete RFP response package")
+            st.info("Pricing data has been automatically sent to the Main Agent for report generation", icon="📄")
+            st.caption("Proceed to the Reports page to view and export the consolidated RFP deliverable.")

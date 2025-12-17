@@ -176,7 +176,7 @@ st.markdown("""
 st.markdown("""
 <div class="main-header">
     <h1>Technical Agent</h1>
-    <p>Intelligent product matching and specification alignment analysis</p>
+    <p>Technical requirement analysis and product compatibility matching.</p>
 </div>
 """, unsafe_allow_html=True)
 
@@ -251,10 +251,10 @@ if "technical_result" not in st.session_state:
         <div class="info-card">
             <h4>🔍 Analysis Process</h4>
             <ul>
-                <li>Parse RFP specifications</li>
-                <li>Query OEM product catalog</li>
-                <li>Calculate spec match scores</li>
-                <li>Rank top 3 products per item</li>
+                <li>Parse RFP technical specifications</li>
+                <li>Map specifications to OEM offerings</li>
+                <li>Compute specification match scores</li>
+                <li>Rank top three products per requirement</li>
             </ul>
         </div>
         """, unsafe_allow_html=True)
@@ -262,7 +262,7 @@ if "technical_result" not in st.session_state:
     with col2:
         st.markdown("<br>", unsafe_allow_html=True)
         if st.button("Run Technical Analysis", use_container_width=True, type="primary"):
-            with st.spinner("🔄 Analyzing specifications and matching against OEM catalog..."):
+            with st.spinner("Evaluating RFP specifications against the OEM product catalog…"):
                 st.session_state.technical_result = run_technical_agent(main_result)
                 st.rerun()
 else:
@@ -281,7 +281,7 @@ if "technical_result" in st.session_state:
     </div>
     """, unsafe_allow_html=True)
     
-    st.info("📊 **OEM Product Recommendations**  \nTop 3 matching products for each RFP line item, ranked by specification alignment", icon="📊")
+    st.info("**Top three best-fit products per RFP line item, ranked by specification alignment.", icon="📊")
     
     # Summary metrics
     rfp_items = tech.get("rfp_items", [])
@@ -354,7 +354,7 @@ if "technical_result" in st.session_state:
         with col1:
             st.markdown("##### ✅ Analysis Complete")
             st.markdown("""
-            Technical matching has been completed successfully. The recommendations are ready to be sent to the Main Agent for consolidation with pricing data.
+            Technical matching is complete. Recommendations are ready for consolidation with pricing inputs by the Main Agent.
             """)
         
         with col2:
@@ -364,7 +364,7 @@ if "technical_result" in st.session_state:
                     **main_result,
                     "technical_recommendations": tech["rfp_items"]
                 }
-                st.success("✅ Technical recommendations successfully routed to Main Agent", icon="✅")
+                st.success("Technical recommendations successfully routed to Main Agent", icon="✅")
                 st.balloons()
             else:
                 st.caption("Results will be used for pricing estimation and final RFP response preparation")
