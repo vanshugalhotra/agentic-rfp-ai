@@ -298,7 +298,7 @@ if "pricing_result" not in st.session_state:
                 
                 st.rerun()
 else:
-    st.success("✅ Pricing computation completed successfully", icon="✅")
+    st.success("Pricing computation completed successfully", icon="✅")
 
 # ==================================================
 # PRICING BREAKDOWN
