@@ -147,7 +147,7 @@ st.markdown("""
 # ==================================================
 st.markdown("""
 <div class="main-header">
-    <h1>🤖 Agentic RFP Response Automation</h1>
+    <h1>Agentic RFP Response Automation</h1>
     <p>End-to-end multi-agent system for discovering, analyzing, matching, pricing, and consolidating B2B RFPs</p>
 </div>
 """, unsafe_allow_html=True)
@@ -220,9 +220,6 @@ def render_graph(current_stage):
         'output': '#bbf7d0'
     }
 
-    active_color = '#2563eb'
-    completed_color = '#10b981'
-
     current_fill = stage_colors.get(current_stage, '#f1f5f9')
 
     dot.node('input', 'Input URLs', fillcolor='#bfdbfe' if current_stage == 'input' else '#f1f5f9')
@@ -250,6 +247,7 @@ if 'stage' in st.session_state:
     render_graph(current_stage)
 
     if current_stage == 'sales':
+        print("=== SALES AGENT STARTED ===")
         st.markdown("""
         <div class="section-header">
             <div class="section-number">2</div>
@@ -267,11 +265,13 @@ if 'stage' in st.session_state:
                     rfp = event["data"]["selected_rfp"]
                     placeholder.success("✅ RFP discovered and selected")
             if rfp:
+                print("=== SALES AGENT COMPLETED ===")
                 st.session_state['rfp'] = rfp
                 st.session_state['stage'] = 'main_draft'
                 st.rerun()
 
     elif current_stage == 'main_draft':
+        print("=== MAIN AGENT (DRAFT) STARTED ===")
         st.markdown("""
         <div class="section-header">
             <div class="section-number">3</div>
@@ -281,11 +281,13 @@ if 'stage' in st.session_state:
 
         with st.spinner("Analyzing RFP and generating role-specific summaries..."):
             main_result = run_main_draft(st.session_state['rfp'])
+        print("=== MAIN AGENT (DRAFT) COMPLETED ===")
         st.session_state['main_result'] = main_result
         st.session_state['stage'] = 'technical'
         st.rerun()
 
     elif current_stage == 'technical':
+        print("=== TECHNICAL AGENT STARTED ===")
         st.markdown("""
         <div class="section-header">
             <div class="section-number">4</div>
@@ -295,11 +297,13 @@ if 'stage' in st.session_state:
 
         with st.spinner("Matching RFP specifications to OEM product catalog..."):
             technical_result = run_technical_agent(st.session_state['main_result'])
+        print("=== TECHNICAL AGENT COMPLETED ===")
         st.session_state['technical_result'] = technical_result
         st.session_state['stage'] = 'pricing'
         st.rerun()
 
     elif current_stage == 'pricing':
+        print("=== PRICING AGENT STARTED ===")
         st.markdown("""
         <div class="section-header">
             <div class="section-number">5</div>
@@ -313,11 +317,13 @@ if 'stage' in st.session_state:
         }
         with st.spinner("Calculating material and testing costs..."):
             pricing_result = run_pricing_agent(pricing_input)
+        print("=== PRICING AGENT COMPLETED ===")
         st.session_state['pricing_result'] = pricing_result
         st.session_state['stage'] = 'main_final'
         st.rerun()
 
     elif current_stage == 'main_final':
+        print("=== MAIN AGENT (FINAL CONSOLIDATION) STARTED ===")
         st.markdown("""
         <div class="section-header">
             <div class="section-number">6</div>
@@ -334,12 +340,16 @@ if 'stage' in st.session_state:
             pdf_path = f"data/outputs/RFP_RESPONSE_{st.session_state['main_result']['rfp_metadata']['tender_reference']}.pdf"
             generate_rfp_response_pdf(final_rfp_response, pdf_path)
 
+        print("=== MAIN AGENT (FINAL CONSOLIDATION) COMPLETED ===")
+        print(f"PDF saved to: {pdf_path}")
+
         st.session_state['final_rfp_response'] = final_rfp_response
         st.session_state['final_pdf_path'] = pdf_path
         st.session_state['stage'] = 'output'
         st.rerun()
 
     elif current_stage == 'output':
+        print("=== PIPELINE FULLY COMPLETED ===")
         st.markdown("""
         <div class="section-header">
             <div class="section-number">7</div>
